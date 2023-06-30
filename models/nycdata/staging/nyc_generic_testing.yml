@@ -6,7 +6,18 @@ models:
       - name: tpep_pickup_datetime
         description: pickup time for each row shouldn't be null
         tests:
+          - not_null:
+              config:
+                store_failures: true
+                severity: warn
+                error_if: ">100"
+                warn_if: ">30"
+      - name: total_amount
+        description: fare amount for the trip
+        tests:
           - not_null
+          - assert_amount_greaterthan_5
+          - dbt_expectations.expect_column_values_to_not_be_null   
   - name: nyc_taxi_zone
     description: This is central zone data for the nyc taxi data
     columns:
