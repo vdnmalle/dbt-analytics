@@ -1,0 +1,16 @@
+version: 2
+models:
+  - name: nyc_taxi_2023_02
+    description: One entry in the table for each ride of the customer
+    columns:
+      - name: tpep_pickup_datetime
+        description: pickup time for each row shouldn't be null
+        tests:
+          - not_null
+  - name: nyc_taxi_zone
+    description: This is central zone data for the nyc taxi data
+    columns:
+      - name: LocationID
+        description: LocationID for the table shouldn't be null
+        tests:
+          - not_null

@@ -1,0 +1,26 @@
+version: 2
+sources:
+  - name: bigquery
+    schema: rawdata
+    database: raw-data-390218
+    tables:
+      - name: yellow_nyc_taxi_02
+        description: '{{doc("order_status")}}'
+        columns:
+          - name: tpep_pickup_datetime
+            tests:
+              - not_null
+        loaded_at_field: tpep_pickup_datetime
+        freshness: 
+          warn_after:
+            count: 90
+            period: day
+          error_after:
+            count: 365
+            period: day
+        
+      - name: yellow_taxi_zone
+        columns:
+          - name: Zone
+            tests:
+              - not_null
